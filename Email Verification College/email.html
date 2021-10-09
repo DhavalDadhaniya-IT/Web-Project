@@ -1,0 +1,31 @@
+<html>
+    <script>
+        const thisForm = document.getElementById('myForm');
+thisForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const formData = new FormData(thisForm).entries()
+    const response = await postMessage('https://jgzjnfa3vd.execute-api.us-east-1.amazonaws.com/dev/v1', {
+        method: 'POST',
+        body: JSON.stringify(Object.fromEntries(formData))
+    });
+
+    const result = await response.json();
+    print(result);
+
+});
+    </script>
+    <body>
+    <form id="myForm">
+        <label for="myName">Send me your name:</label>
+        <input id="myName" name="name" value="Alex">
+        <br>
+        <label for="userId">your id:</label>
+        <input id="userId" name="id" value="123">
+        <br>
+        <label for="myJob">your name:</label>
+        <input id="myJob" name="job" value="Web Dev">
+        <br>
+        <input id="postSubmit" type="submit" value="Send Me!">
+    </form>
+</body>
+</html>
